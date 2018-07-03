@@ -1,0 +1,20 @@
+#!/bin/bash
+
+PATH=/bin:/usr/bin
+
+[ -d /etc/vpnc/connect.d ] || mkdir -p /etc/vpnc/connect.d
+[ -d /etc/vpnc/post-connect.d ] || mkdir -p /etc/vpnc/post-connect.d
+
+# do not set /etc/resolv.conf
+[ -f /etc/vpnc/connect.d/01-resolv.conf ] || {
+    echo "export INTERNAL_IP4_DNS=" > /etc/vpnc/connect.d/01-resolv.conf
+}
+
+# do not replace default gateway
+[ -f /etc/vpnc/connect.d/02-defroute ] || {
+    cat <<'EOF' > /etc/vpnc/connect.d/02-defroute
+set_default_route() {
+    rm -f $DEFAULT_ROUTE_FILE
+}
+EOF
+}

@@ -1,0 +1,19 @@
+[Unit]
+Description=Cisco AnyConnect connection setup
+After=network.target
+After=vpnauth@%i.service
+Requires=vpnauth@%i.service
+
+[Service]
+Type=forking
+EnvironmentFile=-/etc/vpn/vpn-login-%i
+EnvironmentFile=-/etc/vpn/vpn-access-%i
+ExecStartPre=/usr/local/sbin/vpn/vpn-setup
+ExecStart=/usr/local/sbin/vpn/vpn-run %i
+PIDFile=/var/run/webvpn-%i.pid
+ExecReload=/bin/kill -HUP $MAINPID
+Restart=on-failure
+RestartSec=42s
+
+[Install]
+WantedBy=multi-user.target

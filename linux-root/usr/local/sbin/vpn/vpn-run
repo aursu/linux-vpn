@@ -1,0 +1,14 @@
+#!/bin/bash
+
+inst="$1"
+
+PATH=/bin:/usr/bin:/sbin:/usr/sbin
+
+if [ -n "$VPNCOOKIE" -a -n "$CERTHASH" -a -n "$VPNGATEWAY" -a -n "$inst" ]; then 
+    openconnect --background \
+        --pid-file="/run/webvpn-${inst}.pid" --servercert "sha256:${CERTHASH}" \
+        --no-dtls \
+        -C "$VPNCOOKIE" $VPNGATEWAY
+else
+    exit 1
+fi
