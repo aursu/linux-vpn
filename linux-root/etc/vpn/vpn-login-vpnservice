@@ -1,0 +1,4 @@
+# no curly brackets around data
+VPNGATEWAY=<IP address or hostname>
+VPNLOGIN=<Your Username>
+VPNSECRET=<Your Passowrd>
