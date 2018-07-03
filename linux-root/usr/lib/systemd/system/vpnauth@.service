@@ -1,0 +1,8 @@
+[Unit]
+Description=Cisco AnyConnect authentication
+After=network.target
+
+[Service]
+Type=oneshot
+EnvironmentFile=-/etc/vpn/vpn-login-%i
+ExecStart=/usr/local/sbin/vpn/vpn-auth %i

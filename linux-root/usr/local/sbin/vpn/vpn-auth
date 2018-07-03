@@ -1,0 +1,32 @@
+#!/bin/bash
+
+PATH=/bin:/usr/bin
+
+inst="$1"
+
+if [ -n "$VPNGATEWAY" -a -n "$VPNLOGIN" -a -n "$VPNSECRET" ]; then
+VPNCOOKIE=$(curl -s -k "https://${VPNGATEWAY}/+webvpn+/index.html" \
+        -H 'Cookie: webvpnlogin=1' \
+        --data 'group_list=DefaultWEBVPNGroup' \
+        --data "username=${VPNLOGIN}" \
+        --data "password=${VPNSECRET}" \
+        -o/dev/null -D- | \
+    awk -F: '$1 ~ /Set-Cookie/ && $2 ~ /webvpn=/ {print $2}' | \
+    awk -F\; '{print $1}' | \
+    sed 's/^[[:space:]]*//g; s/webvpn=//')
+
+CERTHASH=$(echo | \
+    openssl s_client -connect $VPNGATEWAY:443 2>/dev/null | \
+    openssl x509 -pubkey -noout | \
+    openssl pkey -pubin -outform der | \
+    openssl sha256 | \
+    awk '{print $2}')
+fi
+
+if [ -n "$VPNCOOKIE" -a -n "$CERTHASH" -a -n "$inst" ]; then
+    cat <<EOF > "/etc/vpn/vpn-access-$inst"
+VPNCOOKIE=${VPNCOOKIE}
+CERTHASH=${CERTHASH}
+EOF
+    [ -f "/etc/vpn/vpn-access-$inst" ] && chmod 600 "/etc/vpn/vpn-access-$inst"
+fi
