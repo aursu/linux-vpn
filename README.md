@@ -7,6 +7,11 @@ Cisco AnyConnect VPN client scripts
 1. `openconnect` package should be installed (eg `yum install openconnect` on CentOS 7)
 2. content of this repository should be copied into `/usr/local/sbin/vpn`, `/usr/lib/systemd/system` and `/etc/vpn` accordingly
 
+### Settings
+
+1. Optionally could be installed Post coneection script /etc/vpnc/post-connect.d/01-workenv
+2. Optionally could be adjusted logging settings for charon IKE daemon using settings from /etc/strongswan.d/charon-logging.conf 
+
 ### Setup
 
 1. `/etc/vpn/vpn-login-<VPN service name>` should be set with correct credentials
