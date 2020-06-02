@@ -1,0 +1,12 @@
+# https://www.openssl.org/docs/manmaster/man5/config.html
+openssl_conf = openssl_init
+
+[openssl_init]
+ssl_conf = ssl_configuration
+
+[ssl_configuration]
+system_default = tls_system_default
+
+[tls_system_default]
+MinProtocol = TLSv1
+CipherString = DEFAULT:@SECLEVEL=1
