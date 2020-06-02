@@ -9,8 +9,8 @@ Cisco AnyConnect VPN client scripts
 
 ### Settings
 
-1. Optionally could be installed Post coneection script /etc/vpnc/post-connect.d/01-workenv
-2. Optionally could be adjusted logging settings for charon IKE daemon using settings from /etc/strongswan.d/charon-logging.conf 
+1. Optionally could be installed Post connection script `/etc/vpnc/post-connect.d/01-workenv`
+2. Optionally could be adjusted logging settings for charon IKE daemon using settings from `/etc/strongswan.d/charon-logging.conf`
 
 ### Setup
 
