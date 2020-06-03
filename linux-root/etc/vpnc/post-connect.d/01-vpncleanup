@@ -1,0 +1,21 @@
+if [ -n "$TUNDEV" -a "$VPNGATEWAY" = "<<VPN GW IP>>" ]; then
+        if [ -n "$CISCO_SPLIT_INC" ]; then
+                i=0
+                while [ $i -lt $CISCO_SPLIT_INC ] ; do
+                        eval NETWORK="\${CISCO_SPLIT_INC_${i}_ADDR}"
+                        eval NETMASK="\${CISCO_SPLIT_INC_${i}_MASK}"
+                        eval NETMASKLEN="\${CISCO_SPLIT_INC_${i}_MASKLEN}"
+                        NETBASE3=${NETWORK%.*}
+                        NETBASE2=${NETBASE3%.*}
+                        NET1ST=${NETBASE2%.*}
+                        NET2ND=${NETBASE2#*.}
+                        if [ "$NET1ST" = "10" -o "$NETBASE2" = "192.168" ]; then
+                                del_network_route "$NETWORK" "$NETMASK" "$NETMASKLEN" "$TUNDEV"
+                        fi
+                        if [ "$NET1ST" = "172" -a $NET2ND -ge 16 -a $NET2ND -le 31 ]; then
+                                del_network_route "$NETWORK" "$NETMASK" "$NETMASKLEN" "$TUNDEV"
+                        fi
+                        i=`expr $i + 1`
+                done
+        fi
+fi
