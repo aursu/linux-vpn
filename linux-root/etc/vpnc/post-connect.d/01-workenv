@@ -1,3 +1,4 @@
 if [ -n "$TUNDEV" -a "$VPNGATEWAY" = "<<VPN GW IP>>" ]; then
-    ip route add <<Work PC IP/LAN NET IP>> dev $TUNDEV
+    ip route add <<WORK PC IP>> dev $TUNDEV
+    ip route add <<WORK LAN ADDR>> dev $TUNDEV
 fi
