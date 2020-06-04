@@ -1,3 +1,3 @@
 if [ -n "$TUNDEV" ]; then
-    iptables -t nat -A POSTROUTING -s <<HOME NET ADDR>> -o $TUNDEV -j MASQUERADE
+    iptables -t nat -A POSTROUTING -o $TUNDEV -j MASQUERADE
 fi
