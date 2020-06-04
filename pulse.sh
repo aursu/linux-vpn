@@ -128,13 +128,13 @@ EOF
 
 JAVAi386=/usr/java/latest.i586/bin/java
 
-UNAME=<<VPN USER>>
+UNAME="<<VPN USER>>"
 # LDAP password
 PWD='<<VPN PWD>>'
 # Secure PIN
 PIN='<<RSA PIN>>'
 
-HOST=<<SERVER HOST>>
+HOST="<<SERVER HOST>>"
 ORIGIN="https://$HOST"
 URLPATH="<<SERVER URL PATH>>"
 IVEURL="${ORIGIN}$URLPATH"
