@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Pulse Connect Secure (PCS) Hostname - <<SERVER HOST>> (eg vpn.pulsesecure.net)
-# Pulse Connect Secure URL Path - <<SERVER URL PATH>>. (eg /division/)
+# Pulse Connect Secure URL Path - <<SERVER URL PATH>> (eg /division/)
 # Pulse Connect Secure sign-in URL - <<SERVER URL>> (https://<<SERVER HOST>><<SERVER URL PATH>>) (eg https://vpn.pulsesecure.net/division/)
 # VPN username - <<VPN USER>>
 # VPN password - <<VPN PWD>>
@@ -96,7 +96,7 @@ EOF
 # Alexander Ursu - 2015-06-22 !!! UPDATED
 # Script for automatic Juniper VPN connection
 # Requirements:
-# 1) network connect software should be installed:
+# 1) network connect software should be installed (only for x86_64/i686 systems):
 #    a) create folder:
 #        mkdir -p ~/.juniper_networks/network_connect
 #        mkdir -p /usr/local/nc
@@ -117,14 +117,22 @@ EOF
 #        chmod 755 /usr/local/nc 
 #        chmod 6711 /usr/local/nc/ncsvc
 # 2) curl should be installed (i.e. yum install curl) 
-# 3) Packages: glibc.i686, zlib.i686, libgcc.i686 
-#    Only for GUI:
+# 3) Packages: glibc.i686, zlib.i686, libgcc.i686 (only for x86_64/i686 systems):
+#    Only for GUI on x86_64/i686 systems:
 #              libXrender.i686
 #              libXtst.i686
 # 4) Setup properly credentials below
-# 5) Run this script under regular user (not root) (-h option for help)
+#    - <<SERVER HOST>>
+#    - <<SERVER URL PATH>>
+#    - <<VPN USER>>
+#    - <<VPN PWD>>
+#    - <<RSA PIN>>
+#    - <<AUTH REALM>>
+# 5) Run this script under regular user (not root)
+#    - on ARM/aarch64 systems run it only under root user
 # 6) to check if VPN is running use route -n (you should see different routing table than your default)
-# 7) Only for GUI: Oracle JAVA i386 should be installed
+# 7) Only for GUI on x86_64/i686 systems: Oracle JAVA i386 should be installed
+# 8) On ARM/aarch64 systems openconnect client is required (eg apt install openconnect)
 
 JAVAi386=/usr/java/latest.i586/bin/java
 
