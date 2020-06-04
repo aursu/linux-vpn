@@ -4,6 +4,7 @@ PATH=/bin:/usr/bin
 
 [ -d /etc/vpnc/connect.d ] || mkdir -p /etc/vpnc/connect.d
 [ -d /etc/vpnc/post-connect.d ] || mkdir -p /etc/vpnc/post-connect.d
+[ -d /etc/vpnc/post-disconnect.d ] || mkdir -p /etc/vpnc/post-disconnect.d
 
 # do not set /etc/resolv.conf
 [ -f /etc/vpnc/connect.d/01-resolv.conf ] || {
