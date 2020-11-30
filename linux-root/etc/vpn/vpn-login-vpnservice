@@ -1,4 +1,5 @@
 # no curly brackets around data
 VPNGATEWAY=<IP address or hostname>
+VPNGROUP=<VPN Group>
 VPNLOGIN=<Your Username>
 VPNSECRET=<Your Passowrd>
