@@ -7,7 +7,7 @@ inst="$1"
 if [ -n "$VPNGATEWAY" -a -n "$VPNLOGIN" -a -n "$VPNSECRET" ]; then
 VPNCOOKIE=$(curl -s -k "https://${VPNGATEWAY}/+webvpn+/index.html" \
         -H 'Cookie: webvpnlogin=1' \
-        --data 'group_list=DefaultWEBVPNGroup' \
+        --data "group_list=${VPNGROUP:-DefaultWEBVPNGroup}" \
         --data "username=${VPNLOGIN}" \
         --data "password=${VPNSECRET}" \
         -o/dev/null -D- | \
